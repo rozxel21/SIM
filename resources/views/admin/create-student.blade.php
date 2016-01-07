@@ -117,10 +117,16 @@
         type: 'POST',
         data: fd,
         success: function(){
+          $('#progress').html('');
           console.log('k');
         },
         error: function(e){
           console.log(e);
+          var markup = "<div class='alert alert-danger'>";
+          markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
+                      markup += "<i class='fa fa-times'></i></button>";
+                      markup += e.responseText + "</div>";
+          $('.validation-message').html(markup);    
         }
       });
 
