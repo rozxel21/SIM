@@ -8,6 +8,7 @@ use Faker\Provider\Uuid;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Student;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\updateUserRequest;
 
@@ -63,67 +64,60 @@ class AdminController extends Controller{
         return view('admin.create-student');
     }
 
-    public function saveFile(Request $req){
+    public function saveFile(){
 
-       /* $csvFile = Input::file('file');*/
-      /* $x = 'x';
-       $file = $req->file('file');
-       $extention = $file->getClientOriginalExtension();
-       
-       $rules = array(
-            'data' => 'mimes:cvs'
-        );
-
-       $validation = Validator::make($file, $rules);
-        
-        if($validation->fail()){
-            return 'okay';
-        }*/
-        $this->validate($req, [
-            'file' => 'required|mimes: cvs,txt',
-        ]);
-      
-
-      /* $file = Input::file('image');
-        $soliste = Soliste::findOrFail(Input::get('id'));
-
-
-        $input = array('image' => $file);
-        $rules = array(
-            'image' => 'image'
-        );
-        $validator = Validator::make($input, $rules);
-        if ( $validator->fails() )
-        {
-            return Response::json(['success' => false, 'errors' => $validator->getMessageBag()->toArray()]);
-
-        }*/
+        $csvFile = Input::file('file');
     
-        /*$file_handle = fopen($csvFile, 'r');
+        $file_handle = fopen($csvFile, 'r');
         while (!feof($file_handle) ) {
             $line_of_text = fgetcsv($file_handle, 1024);
-            $students[] = array(
-                'idno' => $line_of_text[0],
-                'lastname' => $line_of_text[2],
-                'firstname' => $line_of_text[3],
-                'middlename' => $line_of_text[4],
-                'section' => $line_of_text[5],
-                'course' => $line_of_text[6],
-                'college' => $line_of_text[7]
-            );
+            if($line_of_text != null){
+                 $studentData[] = array(
+                    'stud_idno' => $line_of_text[0],
+                    'lastname' => $line_of_text[2],
+                    'firstname' => $line_of_text[3],
+                    'middlename' => $line_of_text[4],
+                    'yr_sec' => $line_of_text[5],
+                    'course' => $line_of_text[6],
+                    'college' => $line_of_text[7]
+                );
+            }
         }
         fclose($file_handle);
 
-        foreach ($students as $student) {
-            $stud = new Student;
-            $stud->idno = $student['idno'];
-            $stud->firstname = $student['firstname'];
-            $stud->middlename = $student['middlename'];
-            $stud->lastname = $student['lastname'];
-            $stud->college = $student['college'];
-            $stud->course = $student['course'];
-            $stud->section = $student['section'];
-            $stud->save();
-        }*/
+        $errorList = array();
+        $i = 1;
+        foreach ($studentData as $student) {
+           $validator = Validator::make($student, [
+                'stud_idno' => 'unique:students|regex:/^\d{2}-+\d{4}$/',
+                'lastname' => 'min:2',
+                'firstname' => 'min:2',
+            ]);
+
+            if($validator->fails()){
+                foreach ($validator->errors()->all() as $err) {
+                    $errorList[] = 'Line ' . $i . ' - ' . $err ;
+                }
+            }else{
+                $stud = new Student;
+                $stud->student_guid = Uuid::uuid();
+                $stud->stud_idno = $student['stud_idno'];
+                $stud->firstname = $student['firstname'];
+                $stud->middlename = $student['middlename'];
+                $stud->lastname = $student['lastname'];
+                $stud->college = $student['college'];
+                $stud->course = $student['course'];
+                $stud->yr_sec = $student['yr_sec'];
+                $stud->save();
+            }
+            $i++;
+        } 
+
+        return $errorList;  
+    }
+
+    // colleges
+    public function getCreateCollege(){
+        return view('admin.create-college');
     }
 }

@@ -5,7 +5,7 @@
       	<header class="panel-heading">Create New Student</header>
       	<div class="panel-body">
       		  <div class="validation-message"></div>
-          	<!-- <form class="form-horizontal tasi-form" id='create-student-form'>
+          	<form class="form-horizontal tasi-form" id='create-student-form'>
               <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">ID Number</label>
                   <div class="col-sm-10">
@@ -30,12 +30,6 @@
                     <input type="text" name='lastname' placeholder='Enter Student Last Name' class="form-control" required>
                 </div>
             	</div>
-              <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Address</label>
-                <div class="col-sm-10">
-                    <input type="text" name='address' placeholder='Enter Student Address' class="form-control" required>
-                </div>
-              </div>
             	<div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">College</label>
                 <div class="col-sm-10">
@@ -58,7 +52,7 @@
             		<a href='/admin' class="btn btn-md btn-danger">Cancel</a>
               	<button type='submit' class="btn btn-md btn-primary">Save</button>
             	</div>  
-          	</form> -->
+          	</form>
 
             <h3 class='text-center'><i>or</i></h3>
 
@@ -66,72 +60,62 @@
               <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">CSV or Exel File</label>
                   <div class="col-sm-10">
-                    <input type="file" id='file' name='file' class="form-control" />
+                    <input type="file" id='file' name='file' class="form-control" ng-pattern='([^\s]+(\.(?i)(csv))$)' required />
                   </div>
               </div>
-              <button type='submit' class="btn btn-md btn-primary">Save</button>
+              <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                     <button type='submit' class="btn btn-md btn-primary">Upload</button>
+                  </div>
+              </div>
             </form>
       	</div>
-
-        <p id='progress'></p>
     </section>
 @stop
 
 @section('script')
   <script type="text/javascript">
-  $(document).ready(function () {
-    var App = {
-        name: 'SIM',
-        api: 'http://localhost:721'
-      }
+    $(document).ready(function () {
+      $('#import-student-form').submit(function(e){
+          e.preventDefault();
 
-    $('#import-student-form').submit(function(e){
-      e.preventDefault();
+          var file = $('input[type=file]').val();
+         if (!file.match(/\.(?:csv)$/)) {
+              var markup = "<div class='alert alert-danger'>";
+                markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
+                            markup += "<i class='fa fa-times'></i></button>";
+                            markup += "CSV File Only</div>";
+                $('.validation-message').html(markup);  
+         }else{
+            var fd = new FormData(this);
 
-      var fd = new FormData(this);
+            $.ajax({
+              url: App.api + '/api/admin/save/student',
+              processData: false,
+              contentType: false,
+              type: 'POST',
+              data: fd,
+              success: function(data){
+                $('#progress').html('');
+                markup = "<div class='alert alert-success'><button data-dismiss='alert' class='close close-sm' type='button'>";
+                markup += "<i class='fa fa-times'></i></button>";
+                markup += "Success Uploaded</div>";
+                $('.validation-message').html(markup);
 
-      $.ajax({
-        url: App.api + '/test',
-        xhr: function() { // custom xhr (is the best)
-
-            var xhr = new XMLHttpRequest();
-            var total = 0;
-
-            // Get the total size of files
-            $.each(document.getElementById('file').files, function(i, file) {
-              total += file.size;
+                if(data != null){
+                  markup += "<div class='alert alert-warning'><button data-dismiss='alert' class='close close-sm' type='button'>";
+                  markup += "<i class='fa fa-times'></i></button><ul>";
+                    $.each(data, function(i, list){
+                      markup += '<li>' + list + '</li>';
+                    });
+                  markup += "</ul></div>";
+                  $('.validation-message').html(markup);
+                }
+              },
             });
-
-            // Called when upload progress changes. xhr2
-            xhr.upload.addEventListener("progress", function(evt) {
-              // show progress like example
-              var loaded = (evt.loaded / total).toFixed(2)*100; // percent
-
-              $('#progress').text('Uploading... ' + loaded + '%' );
-            }, false);
-
-            return xhr;
-          },
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        data: fd,
-        success: function(){
-          $('#progress').html('');
-          console.log('k');
-        },
-        error: function(e){
-          console.log(e);
-          var markup = "<div class='alert alert-danger'>";
-          markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
-                      markup += "<i class='fa fa-times'></i></button>";
-                      markup += e.responseText + "</div>";
-          $('.validation-message').html(markup);    
-        }
+         }   
       });
 
     });
-
-  });
   </script>
-@stop
+@stop 

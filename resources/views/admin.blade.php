@@ -135,11 +135,18 @@
 
         <!-- Director App -->
         <script src="{{ URL::asset('assets/js/Director/app.js') }}" type="text/javascript"></script>
+       
         <script type="text/javascript">
              $.ajaxSetup({
                 headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
             });
+
+            var App = {
+                name: 'SIM',
+                api: 'http://localhost:721'
+            }
         </script>
+        
         @yield('script')
     </body>
 </html>
