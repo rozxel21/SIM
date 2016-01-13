@@ -34,6 +34,8 @@
 
 			$('#create-college-form').submit(function(e){
 
+				e.preventDefault();
+
 				var code = $('input[name=college_code]').val();
 				var name = $('input[name=college_name]').val();
 

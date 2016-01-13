@@ -3,14 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Factory;
-use Faker\Provider\Uuid;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Validation\Factory;
+use Faker\Provider\Uuid;
+
 use App\User;
 use App\Student;
+use App\College;
+
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\updateUserRequest;
+use App\Http\Requests\CreateCollegeRequest;
+use App\Http\Requests\UpdateCollegeRequest;
 
 use Validator;
 use Input;
@@ -119,5 +126,31 @@ class AdminController extends Controller{
     // colleges
     public function getCreateCollege(){
         return view('admin.create-college');
+    }
+
+    public function saveCreateCollege(CreateCollegeRequest $req){
+        $college = new College;
+        $college->college_guid = Uuid::uuid();
+        $college->college_code = $req->college_code;
+        $college->college_name = $req->college_name;    
+        $college->save();
+    }
+
+    public function getCollege(){
+        $colleges = College::All();
+        return view('admin.college', compact('colleges'));   
+    }
+
+    public function getCollegeUpdate($id){
+        $college = College::find($id);
+        return view('admin.update-college', compact('college'));
+    }
+
+    public function updateCollege(UpdateCollegeRequest $req){
+        $college = College::find($req->id);
+        $college->college_code = $req->college_code;
+        $college->college_name = $req->college_name;
+        $college->status = $req->status;
+        $college->save();
     }
 }

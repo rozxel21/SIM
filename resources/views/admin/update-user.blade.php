@@ -57,10 +57,6 @@
 @section('script')
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var App = {
-				name: 'SIM',
-				api: 'http://localhost:721'
-			}
 
 			setTimeout(function(){
                 $("select[name=status]").val({{$user->status}});
@@ -89,13 +85,6 @@
 						markup += "<strong>Well done!</strong> You successfully updated the user."
 						markup += '</div>';
 						$('.validation-message').html(markup);
-
-						/*$('input[name=firstname]').val('');
-						$('input[name=middlename]').val('');
-						$('input[name=lastname]').val('');
-						$('input[name=username]').val('');
-						$('input[name=email_address]').val('');
-						$('input[name=password]').val('');*/
 					},
 					error: function(e){
 						var errors = $.parseJSON(e.responseText);
