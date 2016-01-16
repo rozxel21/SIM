@@ -33,7 +33,11 @@
             	<div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">College</label>
                 <div class="col-sm-10">
-                    <input type="text" name='college' placeholder='Enter Student College' class="form-control" required>
+                    <select name="college" class="form-control" required>
+                        @foreach ($colleges as $college) 
+                            <option value="{{ $college->college_code }}" > {{ $college->college_name }} </option>
+                        @endforeach
+                    </select>
                 </div>
             	</div>
             	<div class="form-group">
@@ -74,48 +78,47 @@
 @stop
 
 @section('script')
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('#import-student-form').submit(function(e){
-          e.preventDefault();
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#import-student-form').submit(function(e){
+                e.preventDefault();
 
-          var file = $('input[type=file]').val();
-         if (!file.match(/\.(?:csv)$/)) {
-              var markup = "<div class='alert alert-danger'>";
-                markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
+                var file = $('input[type=file]').val();
+                if (!file.match(/\.(?:csv)$/)) {
+                    var markup = "<div class='alert alert-danger'>";
+                        markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
+                        markup += "<i class='fa fa-times'></i></button>";
+                        markup += "CSV File Only</div>";
+                    $('.validation-message').html(markup);  
+                }else{
+                    var fd = new FormData(this);
+
+                    $.ajax({
+                        url: App.api + '/api/admin/save/student',
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        data: fd,
+                        success: function(data){
+                            $('#progress').html('');
+                            markup = "<div class='alert alert-success'><button data-dismiss='alert' class='close close-sm' type='button'>";
                             markup += "<i class='fa fa-times'></i></button>";
-                            markup += "CSV File Only</div>";
-                $('.validation-message').html(markup);  
-         }else{
-            var fd = new FormData(this);
+                            markup += "Success Uploaded</div>";
+                            $('.validation-message').html(markup);
 
-            $.ajax({
-              url: App.api + '/api/admin/save/student',
-              processData: false,
-              contentType: false,
-              type: 'POST',
-              data: fd,
-              success: function(data){
-                $('#progress').html('');
-                markup = "<div class='alert alert-success'><button data-dismiss='alert' class='close close-sm' type='button'>";
-                markup += "<i class='fa fa-times'></i></button>";
-                markup += "Success Uploaded</div>";
-                $('.validation-message').html(markup);
-
-                if(data != null){
-                  markup += "<div class='alert alert-warning'><button data-dismiss='alert' class='close close-sm' type='button'>";
-                  markup += "<i class='fa fa-times'></i></button><ul>";
-                    $.each(data, function(i, list){
-                      markup += '<li>' + list + '</li>';
+                            if(data != null){
+                                markup += "<div class='alert alert-warning'><button data-dismiss='alert' class='close close-sm' type='button'>";
+                                markup += "<i class='fa fa-times'></i></button><ul>";
+                                $.each(data, function(i, list){
+                                    markup += '<li>' + list + '</li>';
+                                });
+                                markup += "</ul></div>";
+                                $('.validation-message').html(markup);
+                            }
+                        },
                     });
-                  markup += "</ul></div>";
-                  $('.validation-message').html(markup);
-                }
-              },
+                }   
             });
-         }   
-      });
-
-    });
-  </script>
+        });
+    </script>
 @stop 

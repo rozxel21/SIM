@@ -68,7 +68,8 @@ class AdminController extends Controller{
 
     // students
     public function getCreateStudent(){
-        return view('admin.create-student');
+        $colleges = College::All();
+        return view('admin.create-student', compact('colleges'));
     }
 
     public function saveFile(){

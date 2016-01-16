@@ -11,7 +11,7 @@ class CollegeTableSeeder extends Seeder
      */
     public function run()
     {
-        $sql = file_get_contents(__DIR__ . '/dumps/compact(varname)lleges.sql');
+        $sql = file_get_contents(__DIR__ . '/dumps/colleges.sql');
 
         if (! str_contains($sql, ['DELETE', 'TRUNCATE'])) {
             throw new Exception('Invalid sql file. This will not empty the tables first.');

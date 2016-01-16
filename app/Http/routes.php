@@ -9,6 +9,8 @@ Route::get('/admin/user', 'AdminController@getUser');
 Route::get('/admin/college', 'AdminController@getCollege');
 Route::get('/admin/new/student', 'AdminController@getCreateStudent');
 Route::get('/admin/new/college', 'AdminController@getCreateCollege');
+Route::get('/admin/new/course', 'AdminController@getCreateCourse');
+Route::get('/admin/new/subject', 'AdminController@getCreateSubject');
 
 // post
 Route::post('/login', 'AuthController@postLogin');

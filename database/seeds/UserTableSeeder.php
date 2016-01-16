@@ -22,6 +22,6 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('saitama'),
             'credential' => 'administrator',
             'created_at' => date('Y-m-d H:i:s')
-        ]); 
+        ]);
     }
 }
