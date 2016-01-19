@@ -92,17 +92,27 @@
                         </li>
                         <li>
                             <a href="/admin/user">
-                                <i class="fa fa-gavel"></i> <span>Users</span>
+                                <i class="fa fa-user"></i> <span>Users</span>
                             </a>
                         </li>
                         <li>
                             <a href="/admin/student">
-                                <i class="fa fa-globe"></i> <span>Students</span>
+                                <i class="fa fa-users"></i> <span>Students</span>
                             </a>
                         </li>
                         <li>
-                            <a href="simple.html">
-                                <i class="fa fa-glass"></i> <span>Course & Subjects</span>
+                            <a href="/admin/college">
+                                <i class="fa fa-archive"></i> <span>Colleges</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/course">
+                                <i class="fa fa-glass"></i> <span>Courses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/subject">
+                                <i class="fa fa-book"></i> <span>Subjects</span>
                             </a>
                         </li>
                     </ul>

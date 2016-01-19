@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateCollegeRequest extends Request
+class UpdateCourseRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class CreateCollegeRequest extends Request
     public function rules()
     {
         return [
-            'abrr' => 'unique:colleges'
+            'abrr' => 'required|unique:courses,abrr,' . $this->request->get('id'),
+            'status' => 'required'
         ];
     }
 }

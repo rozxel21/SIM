@@ -11,23 +11,25 @@
                 	<tr>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>College</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                	@forelse($colleges as $college)
+                	@forelse($courses as $course)
 					    <tr>
 					    	@inject('str', 'Illuminate\Support\Str')
-	            			<td>{{ $str->upper($college->abrr) }}</td>
-	            			<td>{{ $college->name }}</td>
-	            			@if( $college->status == 1 )
+	            			<td>{{ $str->upper($course->abrr) }}</td>
+	            			<td>{{ $course->name }}</td>
+	            			<td>{{ $str->upper($course->college) }}</td>
+	            			@if( $course->status == 1 )
 	            				<td><span class="label label-success">Active</span></td>
 	            			@else
 	            				<td><span class="label label-warning">Deactivated</span></td>	
 	            			@endif
 	            			<td>
-	            				<a href="/admin/update/college/{{ $college->id }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
+	            				<a href="/admin/update/course/{{ $course->id }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
 	            				<button class="btn btn-default btn-xs"><i class="fa fa-times"></i></button>
 	            			</td>
 	            		</tr>

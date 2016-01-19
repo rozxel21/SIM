@@ -24,7 +24,7 @@ class UpdateCollegeRequest extends Request
     public function rules()
     {
         return [
-            'college_code' => 'required|unique:colleges,college_code,' . $this->request->get('id'),
+            'abrr' => 'required|unique:colleges,abrr,' . $this->request->get('id'),
             'status' => 'required'
         ];
     }

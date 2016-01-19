@@ -13,11 +13,16 @@ use Faker\Provider\Uuid;
 use App\User;
 use App\Student;
 use App\College;
+use App\Course;
+use App\Subject;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\updateUserRequest;
 use App\Http\Requests\CreateCollegeRequest;
 use App\Http\Requests\UpdateCollegeRequest;
+use App\Http\Requests\CreateCourseRequest;
+use App\Http\Requests\UpdateCourseRequest;
+use App\Http\Requests\CreateSubjectRequest;
 
 use Validator;
 use Input;
@@ -132,8 +137,8 @@ class AdminController extends Controller{
     public function saveCreateCollege(CreateCollegeRequest $req){
         $college = new College;
         $college->college_guid = Uuid::uuid();
-        $college->college_code = $req->college_code;
-        $college->college_name = $req->college_name;    
+        $college->abrr = $req->abrr;
+        $college->name = $req->name;    
         $college->save();
     }
 
@@ -149,9 +154,64 @@ class AdminController extends Controller{
 
     public function updateCollege(UpdateCollegeRequest $req){
         $college = College::find($req->id);
-        $college->college_code = $req->college_code;
-        $college->college_name = $req->college_name;
+        $college->abrr = $req->abrr;
+        $college->name = $req->name;
         $college->status = $req->status;
         $college->save();
+    }
+
+    public function getCourse(){
+        $courses = Course::All();
+        return view('admin.course', compact('courses'));
+    }
+
+    public function getCreateCourse(){
+        $colleges = College::All();
+        return view('admin.create-course', compact('colleges'));
+    }
+
+    public function saveCourse(CreateCourseRequest $req){
+        $course = new Course;
+        $course->course_guid = Uuid::uuid();
+        $course->abrr = $req->abrr;
+        $course->name = $req->name;
+        $course->college = $req->college;  
+        $course->save();
+    }
+
+    public function getCourseUpdate($id){
+        $colleges = College::All();
+        $course = Course::find($id);
+        return view('admin.update-course', compact('colleges','course'));
+    }
+
+    public function updateCourse(UpdateCourseRequest $req){
+        $course = Course::find($req->id);
+        $course->abrr = $req->abrr;
+        $course->name = $req->name;
+        $course->college = $req->college;
+        $course->status = $req->status;
+        $course->save();
+    }
+
+    // subjects
+    public function getCreateSubject(){
+        return view('admin.create-subject');
+    }
+
+    public function saveSubject(CreateSubjectRequest $req){
+        $subject = new Subject;
+        $subject->subject_guid = Uuid::uuid();
+        $subject->catalog_no = $req->catalog_no;
+        $subject->descriptive_title = $req->descriptive_title;
+        $subject->lec_units = $req->lec_units;
+        $subject->lab_units = $req->lab_units;
+        $subject->total_units = $req->total_units;
+        $subject->save();
+    }
+
+    public function getSubject(){
+        $subjects = Subject::All();
+        return view('admin.subject', compact('subjects'));
     }
 }

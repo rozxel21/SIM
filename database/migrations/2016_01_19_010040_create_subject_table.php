@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCollegeTable extends Migration
+class CreateSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class CreateCollegeTable extends Migration
      */
     public function up()
     {
-        Schema::create('colleges', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('college_guid', 36)->unique();
-            $table->string('abrr', 10)->unique();
-            $table->string('name', 120);
+            $table->string('subject_guid', 36)->unique();
+            $table->string('catalog_no', 60)->unique();
+            $table->string('descriptive_title');
+            $table->integer('lec_units');
+            $table->integer('lab_units');
+            $table->integer('total_units');
             $table->timestamps();
             $table->boolean('status')->default(true);
         });
@@ -29,6 +32,6 @@ class CreateCollegeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('colleges');
+        Schema::drop('subjects');
     }
 }
