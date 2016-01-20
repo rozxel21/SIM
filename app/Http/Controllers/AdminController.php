@@ -15,6 +15,7 @@ use App\Student;
 use App\College;
 use App\Course;
 use App\Subject;
+use App\Major;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\updateUserRequest;
@@ -172,12 +173,36 @@ class AdminController extends Controller{
     }
 
     public function saveCourse(CreateCourseRequest $req){
-        $course = new Course;
-        $course->course_guid = Uuid::uuid();
+        $courseGuid = Uuid::uuid();
+
+        /*$course = new Course;
+        $course->course_guid = $courseGuid;
         $course->abrr = $req->abrr;
         $course->name = $req->name;
         $course->college = $req->college;  
-        $course->save();
+        $course->save();*/
+        /*foreach ($req->majors as $name) {
+           $list[] = array(
+                'test' => $name
+            );
+        }*/
+        $ctr = 0;
+        $x = $req->majors;
+        return $x;
+        foreach ($x as $y) {
+            $ctr++;
+        }
+
+
+        /*if(count($majors) != 0){
+            foreach ($majors as $name) {
+                $major = new Major;
+                $major->major_guid =  Uuid::uuid();
+                $major->name = $name;
+                $major->course_guid = $courseGuid;
+                $major->save();
+            }
+        }*/
     }
 
     public function getCourseUpdate($id){
@@ -230,5 +255,7 @@ class AdminController extends Controller{
         $subject->total_units = $req->total_units;
         $subject->status = $req->status;
         $subject->save();
+
+
     }
 }
