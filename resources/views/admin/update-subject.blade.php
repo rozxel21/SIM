@@ -5,7 +5,7 @@
       	<header class="panel-heading">Update Subject</header>
       	<div class="panel-body">
       		<div class="validation-message"></div>
-          	<form class="form-horizontal tasi-form" id='update-college-form'>
+          	<form class="form-horizontal tasi-form" id='update-subject-form'>
             	<div class="form-group">
 					<label class="col-sm-2 col-sm-2 control-label">Catalog Number</label>
 					<div class="col-sm-10">
@@ -15,7 +15,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-sm-2 control-label">Descriptive Title</label>
 					<div class="col-sm-10">
-						<textarea name='descriptive_title' value="{{ $subject->descriptive_title }}"  class="form-control" ></textarea>
+						<textarea name='descriptive_title' class="form-control" >{{ $subject->descriptive_title }}</textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -90,6 +90,13 @@
 				e.preventDefault();
 				$('.validation-message').html('');
 
+				var catalogNo = $('input[name=catalog_no]').val();
+				var descriptive = $('textarea[name=descriptive_title]').val();
+				var lec = $('select[name=lec_units]').val();
+				var lab = $('select[name=lab_units]').val();
+				var total =  $('input[name=total_units]').val();
+				var status = $("select[name=status]").val();
+				
 				$.ajax({
 					type: 'POST',
 					url: App.api + '/api/admin/update/subject',
@@ -99,7 +106,8 @@
 						descriptive_title: descriptive,
 						lec_units: lec,
 						lab_units: lab,
-						total_units: total
+						total_units: total,
+						status: status
 					},
 					success: function(){
 						var markup = "<div class='alert alert-success'>";

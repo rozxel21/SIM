@@ -29,8 +29,10 @@ Route::post('/api/admin/save/course', 'AdminController@saveCourse');
 Route::post('/api/admin/update/course', 'AdminController@updateCourse');
 
 Route::post('/api/admin/save/subject', 'AdminController@saveSubject');
+Route::post('/api/admin/update/subject', 'AdminController@updateSubject');
 
 // get with parameters
 Route::get('/admin/update/user/{id}', 'AdminController@getUserUpdate');
 Route::get('/admin/update/college/{id}', 'AdminController@getCollegeUpdate');
 Route::get('/admin/update/course/{id}', 'AdminController@getCourseUpdate');
+Route::get('/admin/update/subject/{id}', 'AdminController@getSubjectUpdate');

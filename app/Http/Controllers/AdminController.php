@@ -23,6 +23,7 @@ use App\Http\Requests\UpdateCollegeRequest;
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Http\Requests\CreateSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 
 use Validator;
 use Input;
@@ -213,5 +214,21 @@ class AdminController extends Controller{
     public function getSubject(){
         $subjects = Subject::All();
         return view('admin.subject', compact('subjects'));
+    }
+
+    public function getSubjectUpdate($id){
+        $subject = Subject::find($id);
+        return view('admin.update-subject', compact('subject'));
+    }
+
+    public function updateSubject(UpdateSubjectRequest $req){
+        $subject = Subject::find($req->id);
+        $subject->catalog_no = $req->catalog_no;
+        $subject->descriptive_title = $req->descriptive_title;
+        $subject->lec_units = $req->lec_units;
+        $subject->lab_units = $req->lab_units;
+        $subject->total_units = $req->total_units;
+        $subject->status = $req->status;
+        $subject->save();
     }
 }
