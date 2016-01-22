@@ -175,26 +175,16 @@ class AdminController extends Controller{
     public function saveCourse(CreateCourseRequest $req){
         $courseGuid = Uuid::uuid();
 
-        /*$course = new Course;
+        $course = new Course;
         $course->course_guid = $courseGuid;
         $course->abrr = $req->abrr;
         $course->name = $req->name;
         $course->college = $req->college;  
-        $course->save();*/
-        /*foreach ($req->majors as $name) {
-           $list[] = array(
-                'test' => $name
-            );
-        }*/
-        $ctr = 0;
-        $x = $req->majors;
-        return $x;
-        foreach ($x as $y) {
-            $ctr++;
-        }
-
-
-        /*if(count($majors) != 0){
+        $course->save();
+      
+        $majors = json_decode($req->majors);
+        
+        if(count($majors) != 0){
             foreach ($majors as $name) {
                 $major = new Major;
                 $major->major_guid =  Uuid::uuid();
@@ -202,13 +192,14 @@ class AdminController extends Controller{
                 $major->course_guid = $courseGuid;
                 $major->save();
             }
-        }*/
+        }
     }
 
     public function getCourseUpdate($id){
         $colleges = College::All();
         $course = Course::find($id);
-        return view('admin.update-course', compact('colleges','course'));
+        $majors = Major::where('course_guid', $course->course_guid)->get();
+        return view('admin.update-course', compact('colleges','course', 'majors'));
     }
 
     public function updateCourse(UpdateCourseRequest $req){

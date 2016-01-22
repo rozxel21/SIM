@@ -8,5 +8,5 @@ class Major extends Model
 {
     protected $table = 'majors';
 
-    protected $fillable = [, 'name', 'course_guid', 'status'];
+    protected $fillable = ['name', 'course_guid', 'status'];
 }

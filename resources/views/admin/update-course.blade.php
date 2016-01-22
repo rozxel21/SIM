@@ -45,6 +45,43 @@
           	</form>
       	</div>
     </section>
+
+   	<section class="panel">
+        <header class="panel-heading">
+              Major
+        </header>
+        <div class="panel-body table-responsive">
+            <table class="table table-hover">
+         		<thead>
+                	<tr>
+                        <th>Name</th> 
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                	@forelse($majors as $major)
+					    <tr>
+	            			<td>{{ $major->name }}</td>
+	            			@if( $major->status == 1 )
+	            				<td><span class="label label-success">Active</span></td>
+	            			@else
+	            				<td><span class="label label-warning">Deactivated</span></td>	
+	            			@endif
+	            			<td class="text-center">
+	            				<a href="" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
+	            				<button class="btn btn-default btn-xs"><i class="fa fa-times"></i></button>
+	            			</td>
+	            		</tr>
+					@empty
+					    <tr>
+					    	<td colspan="5" class="text-center">No Record Found!!!</td>
+					    </tr>
+					@endforelse
+                </tbody>
+            </table>
+        </div>
+    </section>
 @stop
 
 @section('script')

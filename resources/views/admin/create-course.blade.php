@@ -62,7 +62,7 @@
 			var addMajor = 1;
 			$('.add-major-btn').click(function(){
 				addMajor++;
-				var markup = "<div class='form-group'><div class='col-sm-offset-2 col-sm-10'>";
+				var markup = "<div class='form-group form-"+addMajor+"'><div class='col-sm-offset-2 col-sm-10'>";
 					markup += "<input type='text' name='major-" + addMajor + "' placeholder='Enter Course Major' class='form-control'>";
 					markup += "</div></div>";
 				$('#add-major').append(markup);
@@ -105,6 +105,12 @@
 						$('input[name=abrr]').val('');
 						$('input[name=name]').val('');
 						$('select[name=college]').val('');
+						$('input[name=major-1]').val('');
+						
+						for(var i=2; i <= addMajor; i++ ){
+							$(".form-" + i).remove();
+						}
+
 						addMajor = 1;
 
 					},

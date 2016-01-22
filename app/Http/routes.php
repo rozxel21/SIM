@@ -1,7 +1,5 @@
 <?php
 
-use Faker\Provider\Uuid;
-use Illuminate\Support\Str;
 //get
 Route::get('/', 'AuthController@index');
 Route::get('/login', 'AuthController@getLogin');
