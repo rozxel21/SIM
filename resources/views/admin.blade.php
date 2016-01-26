@@ -115,6 +115,22 @@
                                 <i class="fa fa-book"></i> <span>Subjects</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#curriculum" class="collapsed" aria-expanded="false"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="curriculum" class="collapse" aria-expanded="false" style="height: 0px;">
+                                <li>
+                                    <a href="#">Dropdown Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Dropdown Item</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/admin/curriculum">
+                                <i class="fa fa-book"></i> <span>Curriculum</span>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -146,16 +162,7 @@
         <!-- Director App -->
         <script src="{{ URL::asset('assets/js/Director/app.js') }}" type="text/javascript"></script>
        
-        <script type="text/javascript">
-             $.ajaxSetup({
-                headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-            });
-
-            var App = {
-                name: 'SIM',
-                api: 'http://localhost:721'
-            }
-        </script>
+        <script src="{{ URL::asset('js/config.js') }}" type="text/javascript"></script>
         
         @yield('script')
     </body>

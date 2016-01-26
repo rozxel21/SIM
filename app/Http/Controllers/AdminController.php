@@ -246,7 +246,15 @@ class AdminController extends Controller{
         $subject->total_units = $req->total_units;
         $subject->status = $req->status;
         $subject->save();
+    }
 
+    public function getCurriculum(){
+        $courses = Course::All();
+        return view('admin.create-curriculum', compact('courses'));
+    }
 
+    public function getMajorsFromCourse($courseGuid){
+        $majors = Major::where('course_guid', $courseGuid)->get();
+        return $majors;
     }
 }
