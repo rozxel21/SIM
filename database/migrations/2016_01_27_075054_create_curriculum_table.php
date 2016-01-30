@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMajorTable extends Migration
+class CreateCurriculumTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreateMajorTable extends Migration
      */
     public function up()
     {
-        Schema::create('majors', function (Blueprint $table) {
+        Schema::create('curricula', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('major_guid', 36)->unique();
-            $table->string('name');
+            $table->string('curriculum_guid', 36)->unique();
             $table->string('course', 36);
+            $table->string('major', 36);
+            $table->string('effective_sy');
+            $table->string('bor_res');
             $table->timestamps();
             $table->boolean('status')->default(true);
         });
@@ -29,6 +31,6 @@ class CreateMajorTable extends Migration
      */
     public function down()
     {
-        Schema::drop('majors');
+        Schema::drop('curricula');
     }
 }

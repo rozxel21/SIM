@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 08:56 AM
+-- Generation Time: Jan 30, 2016 at 03:26 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `majors` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `major_guid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `course_guid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
+  `course` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -47,7 +47,7 @@ TRUNCATE TABLE `majors`;
 -- Dumping data for table `majors`
 --
 
-INSERT INTO `majors` (`id`, `major_guid`, `name`, `course_guid`, `created_at`, `updated_at`, `status`) VALUES
+INSERT INTO `majors` (`id`, `major_guid`, `name`, `course`, `created_at`, `updated_at`, `status`) VALUES
 (1, '428349B2-AD25-3CC9-8BDD-B0939CC3631A', 'Agricultural Economics', 'D22EB6F0-7F8B-3D45-949B-3F03A77EA04B', '2016-01-21 23:24:39', '2016-01-21 23:24:39', 1),
 (2, 'D40F6FBF-AB75-302A-B322-ABF5E90036CF', 'Agricultural Extension', 'D22EB6F0-7F8B-3D45-949B-3F03A77EA04B', '2016-01-21 23:24:39', '2016-01-21 23:24:39', 1),
 (3, 'E1FEC2C4-A7E3-31D0-B9D5-E248C1D7129E', 'Animal Science: NON-RUMINANT ', 'D22EB6F0-7F8B-3D45-949B-3F03A77EA04B', '2016-01-21 23:24:39', '2016-01-21 23:24:39', 1),
