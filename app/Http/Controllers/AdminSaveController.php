@@ -23,6 +23,8 @@ use App\Http\Requests\CreateCollegeRequest;
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\CreateSubjectRequest;
 
+use App\MyLibraries\Base32;
+
 use Validator;
 use Input;
 use File;
@@ -137,12 +139,16 @@ class AdminSaveController extends Controller
     }
 
 	public function saveCurriculum(Request $req){
+        $guid = Uuid::uuid();;
+
         $curriculum = new Curriculum;
-        $curriculum->curriculum_guid = Uuid::uuid();
+        $curriculum->curriculum_guid = $guid;
         $curriculum->course = $req->course;
         $curriculum->major = $req->major;
         $curriculum->effective_sy = $req->effective;
         $curriculum->bor_res = $req->bor;
         $curriculum->save();
+
+        return Base32::encode($guid);
     }
 }

@@ -117,16 +117,8 @@
 						effective: effective,
 						bor: bor
 					},
-					success: function(){
-						var markup = "<div class='alert alert-success'>";
-						markup += "<button data-dismiss='alert' class='close close-sm' type='button'>";
-						markup += "<i class='fa fa-times'></i></button>";
-						markup += "<strong>Well done!</strong> You successfully create a new college."
-						markup += '</div>';
-						$('.validation-message').html(markup);
-
-						$('input[name=abrr]').val('');
-						$('input[name=name]').val('');
+					success: function(data){
+						window.location.href = App.api + '/admin/curriculum/' + data;
 					},
 					error: function(e){
 						var errors = $.parseJSON(e.responseText);

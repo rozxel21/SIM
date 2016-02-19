@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\MyLibraries\Base32;
 
 use App\User;
 use App\College;
@@ -90,5 +92,11 @@ class AdminGetController extends Controller
     public function getCurriculum(){
         $courses = Course::All();
         return view('admin.create-curriculum', compact('courses'));
+    }
+
+    public function getCreateElective($guid){
+        $curriculum =  Base32::decode($guid);
+        
+        
     }
 }

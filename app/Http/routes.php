@@ -38,5 +38,6 @@ Route::get('/admin/update/user/{id}', 'AdminGetController@getUserUpdate');
 Route::get('/admin/update/college/{id}', 'AdminGetController@getCollegeUpdate');
 Route::get('/admin/update/course/{id}', 'AdminGetController@getCourseUpdate');
 Route::get('/admin/update/subject/{id}', 'AdminGetController@getSubjectUpdate');
+Route::get('/admin/curriculum/{guid}', 'AdminGetController@getCreateElective');
 
 Route::get('/admin/api/get/majors/{courseGuid}', 'AdminGetController@getMajorsFromCourse');
