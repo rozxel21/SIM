@@ -9,7 +9,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-sm-2 control-label">Catalog Number</label>
 					<div class="col-sm-10">
-						<input type="text" name='catalog_no' placeholder='Enter Subject' class="form-control" required>
+						<input type="text" name='catalog_no' class="form-control" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -75,8 +75,8 @@
 			$('#create-subject-form').submit(function(e){
 				e.preventDefault();
 
-				var catalogNo = $('input[name=catalog_no]').val();
-				var descriptive = $('textarea[name=descriptive_title]').val();
+				var catalogNo = $('input[name=catalog_no]').val().toUpperCase();
+				var descriptive = ucwords($('textarea[name=descriptive_title]').val());
 				var lec = $('select[name=lec_units]').val();
 				var lab = $('select[name=lab_units]').val();
 				var total = $('input[name=total_units]').val();

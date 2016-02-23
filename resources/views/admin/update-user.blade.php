@@ -71,9 +71,9 @@
 					url: App.api + '/api/admin/update/user',
 					data: {
 						id: {{ $user->id }},
-						firstname: $('input[name=firstname]').val(),
-						middlename: $('input[name=middlename]').val(),
-						lastname: $('input[name=lastname]').val(),
+						firstname: ucwords($('input[name=lastname]').val()),
+						middlename: ucwords($('input[name=lastname]').val()),
+						lastname: ucwords($('input[name=lastname]').val()),
 						username: $('input[name=username]').val(),
 						email: $('input[name=email_address]').val(),
 						status: $('select[name=status]').val()

@@ -55,7 +55,7 @@
 					data: {
 						id: {{ $college->id }},
 						abrr: $('input[name=abrr]').val(),
-						name: $('input[name=name]').val(),
+						name: ucwords($('input[name=name]').val()),
 						status: $('select[name=status]').val()
 					},
 					success: function(){

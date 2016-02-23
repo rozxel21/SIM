@@ -5,7 +5,7 @@
 		<header class="panel-heading">Create New Curriculum</header>
 		<div class="panel-body">
 			<div class="validation-message"></div>
-			<form class="form-horizontal tasi-form" id='create-curriculum-form'>
+			<form class="form-horizontal tasi-form" id="create-curriculum-form">
 				<div class="form-group">
 					<label class="col-sm-2 col-sm-2 control-label">Course</label>
 					<div class="col-sm-10">

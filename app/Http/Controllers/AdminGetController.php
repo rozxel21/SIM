@@ -14,6 +14,7 @@ use App\College;
 use App\Course;
 use App\Subject;
 use App\Major;
+use App\Curriculum;
 
 class AdminGetController extends Controller
 {
@@ -95,8 +96,23 @@ class AdminGetController extends Controller
     }
 
     public function getCreateElective($guid){
-        $curriculum =  Base32::decode($guid);
-        
-        
+        $curriculum = Curriculum::where('curriculum_guid', Base32::decode($guid))->get()->first();
+        $course = Course::where('course_guid', $curriculum->course)->get()->first();
+        return view('admin.prospectus', compact('curriculum', 'course'));
+       
+    }
+
+    public function searchSubject(){
+        $subjects = Subject::All('catalog_no')->toArray();
+        $list= array();
+        foreach ($subjects as $subject) {
+            array_push($list, $subject['catalog_no']);
+        }
+        return $list;
+    }
+
+    public function getSubjectByCatalog($catalog){
+        $subject = Subject::where('catalog_no', Base32::decode($catalog))->get()->first();
+        return $subject;
     }
 }

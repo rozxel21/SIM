@@ -67,9 +67,9 @@
 					type: 'POST',
 					url: App.api + '/api/admin/save/user',
 					data: {
-						firstname: $('input[name=firstname]').val(),
-						middlename: $('input[name=middlename]').val(),
-						lastname: $('input[name=lastname]').val(),
+						firstname: ucwords($('input[name=firstname]').val()),
+						middlename: ucwords($('input[name=middlename]').val()),
+						lastname: ucwords($('input[name=lastname]').val()),
 						username: $('input[name=username]').val(),
 						email: $('input[name=email_address]').val(),
 						password: $('input[name=password]').val()

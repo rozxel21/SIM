@@ -44,7 +44,7 @@
 					type: 'POST',
 					data: {
 						abrr: abrr,
-						name: name
+						name: ucwords(name)
 					},
 					success: function(){
 						var markup = "<div class='alert alert-success'>";

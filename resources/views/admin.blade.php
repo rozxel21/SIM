@@ -8,12 +8,13 @@
         <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('assets/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
+         <link href="{{ URL::asset('assets/css/admin.css') }}" rel="stylesheet" type="text/css" />
         
         <!-- iCheck for checkboxes and radio inputs -->
         <link href="{{ URL::asset('assets/css/iCheck/all.css') }}" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
         <!-- Theme style -->
-        <link href="{{ URL::asset('assets/css/admin.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ URL::asset('assets/css/jquery.typeahead.min.css') }}" rel="stylesheet" type="text/css" />
     </head>
     
     <body class="skin-black">   
@@ -148,9 +149,8 @@
         </div>
 
         <!-- jQuery 2.0.2 -->
-        <script src="../ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script src="{{ URL::asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        
         <!-- jQuery UI 1.10.3 -->
         <script src="{{ URL::asset('assets/js/jquery-ui-1.10.3.min.js') }}" type="text/javascript"></script>
         <!-- Bootstrap -->
@@ -161,7 +161,9 @@
 
         <!-- Director App -->
         <script src="{{ URL::asset('assets/js/Director/app.js') }}" type="text/javascript"></script>
-       
+
+        <script src="{{ URL::asset('assets/js/jquery.typeahead.min.js') }}" type="text/javascript"></script>
+        <script src="{{ URL::asset('assets/js/nibbler.js') }}" type="text/javascript"></script>
         <script src="{{ URL::asset('js/config.js') }}" type="text/javascript"></script>
         
         @yield('script')

@@ -33,6 +33,10 @@ Route::post('/api/admin/update/subject', 'AdminUpdateController@updateSubject');
 
 Route::post('/api/admin/save/curriculum', 'AdminSaveController@saveCurriculum');
 
+
+Route::get('/api/search/subjects', 'AdminGetController@searchSubject');
+
+
 // get with parameters
 Route::get('/admin/update/user/{id}', 'AdminGetController@getUserUpdate');
 Route::get('/admin/update/college/{id}', 'AdminGetController@getCollegeUpdate');
@@ -41,3 +45,5 @@ Route::get('/admin/update/subject/{id}', 'AdminGetController@getSubjectUpdate');
 Route::get('/admin/curriculum/{guid}', 'AdminGetController@getCreateElective');
 
 Route::get('/admin/api/get/majors/{courseGuid}', 'AdminGetController@getMajorsFromCourse');
+
+Route::get('/api/get/subject/data/{catalog}', 'AdminGetController@getSubjectByCatalog');
