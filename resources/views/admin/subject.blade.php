@@ -14,6 +14,7 @@
                        	<th colspan="3" class="text-center">Units</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 	<tr>
                         <th>Catalog Number</th>
@@ -21,6 +22,7 @@
                         <th>Lec</th>
                         <th>Lab</th>
                         <th>Total</th>
+                        <th>Academic Type</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -32,6 +34,11 @@
 	            			<td>{{ $subject->lec_units }}</td>
 	            			<td>{{ $subject->lab_units }}</td>
 	            			<td>{{ $subject->total_units }}</td>
+                            @if( $subject->academic_type == 1 )
+                                <td><span class="label label-primary">Academic</span></td>
+                            @else
+                                <td><span class="label label-warning">Non-Academic</span></td>   
+                            @endif
 	            			@if( $subject->status == 1 )
 	            				<td><span class="label label-success">Active</span></td>
 	            			@else

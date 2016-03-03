@@ -17,11 +17,13 @@ use App\Course;
 use App\Subject;
 use App\Major;
 use App\Curriculum;
+use App\Prospectus;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateCollegeRequest;
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\CreateSubjectRequest;
+use App\Http\Requests\CreateProspectusRequest;
 
 use App\MyLibraries\Base32;
 
@@ -135,11 +137,12 @@ class AdminSaveController extends Controller
         $subject->lec_units = $req->lec_units;
         $subject->lab_units = $req->lab_units;
         $subject->total_units = $req->total_units;
+        $subject->academic_type = $req->academic_type;
         $subject->save();
     }
 
 	public function saveCurriculum(Request $req){
-        $guid = Uuid::uuid();;
+        $guid = Uuid::uuid();
 
         $curriculum = new Curriculum;
         $curriculum->curriculum_guid = $guid;
@@ -150,5 +153,21 @@ class AdminSaveController extends Controller
         $curriculum->save();
 
         return Base32::encode($guid);
+    }
+
+    public function saveProspectus(CreateProspectusRequest $req){
+        $guid =  Uuid::uuid();
+
+        $prospectus = new Prospectus;
+        $prospectus->prospectus_guid = $guid;
+        $prospectus->catalog_no = $req->catalog_no;
+        $prospectus->curriculum = $req->curriculum;
+        $prospectus->year = $req->year;
+        $prospectus->semester = $req->semester;
+        $prospectus->type = $req->type;
+        $prospectus->reference = $req->reference;
+        $prospectus->save();
+
+        return Prospectus::with('getCatalog')->where('prospectus_guid', $guid)->get()->first();
     }
 }

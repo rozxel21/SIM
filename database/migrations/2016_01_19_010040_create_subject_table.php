@@ -20,6 +20,7 @@ class CreateSubjectTable extends Migration
             $table->integer('lec_units');
             $table->integer('lab_units');
             $table->integer('total_units');
+            $table->boolean('academic_type');
             $table->timestamps();
             $table->boolean('status')->default(true);
         });

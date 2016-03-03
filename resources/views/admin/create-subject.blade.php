@@ -41,10 +41,18 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-sm-2 control-label">Total Units</label>
 					<div class="col-sm-10">
-						<input type="number" name='total_units' value="0" class="form-control" disabled="true" />
+						<input type="number" name='total_units' value="0" class="form-control" readonly />
 					</div>
 				</div>
-
+				<div class="form-group">
+                	<label class="col-sm-2 col-sm-2 control-label">Academic Type</label>
+                  	<div class="col-sm-10">
+                    	<select name="type" class="form-control">
+                    		<option value="1">Academic</option>
+                    		<option value="0">Non-academic</option>
+                    	</select>
+                	</div>
+              	</div>
 				<div class="form-group text-center">
 					<a href='/admin' class="btn btn-md btn-danger">Cancel</a>
 					<button type='submit' class="btn btn-md btn-primary">Save</button>
@@ -79,7 +87,8 @@
 				var descriptive = ucwords($('textarea[name=descriptive_title]').val());
 				var lec = $('select[name=lec_units]').val();
 				var lab = $('select[name=lab_units]').val();
-				var total = $('input[name=total_units]').val();
+				var total = parseInt(lec) + parseInt(lab);
+				var type = $('select[name=type]').val();
 
 				$.ajax({
 					url: App.api + '/api/admin/save/subject',
@@ -89,7 +98,8 @@
 						descriptive_title: descriptive,
 						lec_units: lec,
 						lab_units: lab,
-						total_units: total
+						total_units: total,
+						academic_type: type
 					},
 					success: function(){
 						var markup = "<div class='alert alert-success'>";
@@ -104,6 +114,7 @@
 						$('select[name=lec_units]').val('0');
 						$('select[name=lab_units]').val('0');
 						$('input[name=total_units]').val('0');
+						$('select[name=type]').val('1');
 					},
 					error: function(e){
 						var errors = $.parseJSON(e.responseText);

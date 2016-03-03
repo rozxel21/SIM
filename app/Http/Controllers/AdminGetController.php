@@ -15,6 +15,7 @@ use App\Course;
 use App\Subject;
 use App\Major;
 use App\Curriculum;
+use App\Prospectus;
 
 class AdminGetController extends Controller
 {
@@ -75,7 +76,7 @@ class AdminGetController extends Controller
         return view('admin.create-subject');
     }
 
-    public function getSubject(){
+    public function getSubject(){ 
         $subjects = Subject::All();
         return view('admin.subject', compact('subjects'));
     }
@@ -96,10 +97,9 @@ class AdminGetController extends Controller
     }
 
     public function getCreateElective($guid){
-        $curriculum = Curriculum::where('curriculum_guid', Base32::decode($guid))->get()->first();
-        $course = Course::where('course_guid', $curriculum->course)->get()->first();
-        return view('admin.prospectus', compact('curriculum', 'course'));
-       
+        $curriculum =  Curriculum::with('getCourse', 'getMajor')->where('curriculum_guid', Base32::decode($guid))->get()->first();
+        $subjects = Prospectus::with('getCatalog')->where('curriculum', Base32::decode($guid))->get();
+        return view('admin.prospectus', compact('curriculum', 'subjects'));
     }
 
     public function searchSubject(){
@@ -114,5 +114,10 @@ class AdminGetController extends Controller
     public function getSubjectByCatalog($catalog){
         $subject = Subject::where('catalog_no', Base32::decode($catalog))->get()->first();
         return $subject;
+    }
+
+    public function viewCurriculum(){
+        $curricula = Curriculum::with('getCourse', 'getMajor')->get();
+        return view('admin.curriculum', compact('curricula'));
     }
 }
