@@ -150,7 +150,7 @@
 
         <!-- jQuery 2.0.2 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        
+        <script src="{{ URL::asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="{{ URL::asset('assets/js/jquery-ui-1.10.3.min.js') }}" type="text/javascript"></script>
         <!-- Bootstrap -->

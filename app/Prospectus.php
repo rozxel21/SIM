@@ -11,4 +11,8 @@ class Prospectus extends Model
     public function getCatalog(){
     	return $this->hasOne('App\Subject', 'catalog_no', 'catalog_no');
     }
+
+    public function test(){
+    	return $this->hasMany('App\Subject', 'catalog_no', 'catalog_no');
+    }
 }

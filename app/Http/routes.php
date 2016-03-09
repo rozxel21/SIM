@@ -50,3 +50,4 @@ Route::get('/admin/curriculum/{guid}', 'AdminGetController@getCreateElective');
 Route::get('/admin/api/get/majors/{courseGuid}', 'AdminGetController@getMajorsFromCourse');
 
 Route::get('/api/get/subject/data/{catalog}', 'AdminGetController@getSubjectByCatalog');
+Route::get('/api/get/subjects/{curriculum}', 'AdminGetController@getSubjectForPrereq');

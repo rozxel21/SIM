@@ -120,4 +120,9 @@ class AdminGetController extends Controller
         $curricula = Curriculum::with('getCourse', 'getMajor')->get();
         return view('admin.curriculum', compact('curricula'));
     }
+
+    public function getSubjectForPrereq($guid){
+        $subjects = Prospectus::where('curriculum', Base32::decode($guid))->orderBy('catalog_no')->get(array('catalog_no'));
+        return $subjects;
+    }
 }
