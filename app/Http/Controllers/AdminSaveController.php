@@ -149,6 +149,7 @@ class AdminSaveController extends Controller
         $curriculum->course = $req->course;
         $curriculum->major = $req->major;
         $curriculum->effective_sy = $req->effective;
+        $curriculum->years_taken = $req->years_taken;
         $curriculum->bor_res = $req->bor;
         $curriculum->save();
 
@@ -165,7 +166,6 @@ class AdminSaveController extends Controller
         $prospectus->year = $req->year;
         $prospectus->semester = $req->semester;
         $prospectus->type = $req->type;
-        $prospectus->reference = $req->reference;
         $prospectus->save();
 
         return Prospectus::with('getCatalog')->where('prospectus_guid', $guid)->get()->first();

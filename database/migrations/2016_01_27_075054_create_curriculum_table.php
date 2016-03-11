@@ -19,6 +19,7 @@ class CreateCurriculumTable extends Migration
             $table->string('major', 36);
             $table->string('effective_sy');
             $table->string('bor_res');
+            $table->integer('years_taken');
             $table->timestamps();
             $table->boolean('status')->default(true);
         });
